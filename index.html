@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice 1</title>
+
+    <!-- Font Family  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body,
+        html {
+            padding: 20px 20px;
+        }
+
+        .tax-invoice-header {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 5px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tax-invoice-header>div {
+            /* border: 1px solid black; */
+            border: 1px solid #c7c7c7;
+            height: auto;
+            width: 100%;
+        }
+
+        .tax-invoice-heading {
+            text-align: center;
+            font-family: "Roboto", sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .tax__invoice_1Invoice__container {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 5px;
+        }
+
+        .tax__invoice_1Invoice__container>div {
+            /* border: 1px solid black; */
+            height: auto;
+            padding: 5px 10px;
+        }
+
+        .tax__invoice_1Invoice__container>div:nth-child(1) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tax__invoice_1Invoice__container>div:nth-child(2)>h2,.tax__invoice_1Invoice__container>div:nth-child(2)>p{
+            font-family: "Roboto", sans-serif;
+        }
+
+        .tax__invoice_1Invoice__container>div:nth-child(2)>h2{
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .tax__invoice_1Invoice__container>div:nth-child(2)>p{
+            font-size: 14px;
+            font-weight: 400;
+            margin-top: 5px;
+        }
+
+        .tax__invoice_1Invoice__container>div:nth-child(2)>p>a{
+            text-decoration: none;
+            color: #1c1c1c;
+        }
+
+        .tax__invoice_1Invoice__container>div:nth-child(1){
+            border-right: 1px solid #c7c7c7;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="tax-invoice-heading">Tax Invoice</h1>
+    <div class="tax-invoice-header">
+        <div>
+            <!-- left side row starts here -->
+            <div class="tax__invoice_1Invoice__container">
+                <div>
+                    <img src="./Assets/logo.png" alt="">
+                </div>
+                <div>
+                    <h2><b>AGO2O STORES LLP</b></h2>
+                    <p>Office No. 113 & 114, 1st Floor, Ajmera
+                        Sikova, Nityanand Nagar, Ghatkopar West,,
+                        Mumbai, Maharashtra
+                        India-400086</p>
+                    <p>GST/UIN No. : 27ABSFA3175F1Z8</p>
+                    <p>State Name : Maharashtra
+                    </p>
+                    <p>E-Mail : <a href="mailto:support@o2o.ind.in">support@o2o.ind.in</a></p>
+                </div>
+            </div>
+            <!-- left side row ends here -->
+        </div>
+        <div></div>
+    </div>
+</body>
+
+</html>
