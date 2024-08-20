@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        html {
+            padding: 10px 0px;
+            letter-spacing: 0.3px;
+            max-width: 1000px;
+            margin: 0 auto;
+            font-family: "Roboto", sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        div {
+            text-align: center;
+        }
+
+        .tax-invoice-header {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 5px;
+        }
+
+        .tax-invoice-header>div {
+            /* border: 1px solid black; */
+            border: 1px solid #c7c7c7;
+            height: auto;
+            width: 100%;
+        }
+
+        .tax-invoice-heading {
+            text-align: center;
+            font-family: "Roboto", sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .tax__invoice_1Invoice__container {
+            display: grid;
+            grid-template-columns: 1.8fr 3fr;
+            gap: 5px;
+            border-bottom: 1px solid #c7c7c7;
+        }
+
+        .tax__invoice_1Invoice__container>div,
+        .left__side__bottom_row_container {
+            /* border: 1px solid black; */
+            height: auto;
+            padding: 5px 7px;
+        }
+
+        .tax__invoice_1Invoice__container>div:nth-child(1) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tax__invoice_1Invoice__container>div:nth-child(2)>h2,
+        .tax__invoice_1Invoice__container>div:nth-child(2)>p {
+            font-family: "Roboto", sans-serif;
+        }
+
+        .tax__invoice_1Invoice__container>div:nth-child(2)>h2 {
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .tax__invoice_1Invoice__container>div:nth-child(2)>p {
+            font-size: 14px;
+            font-weight: 400;
+            margin-top: 3px;
+        }
+
+        .tax__invoice_1Invoice__container>div:nth-child(2)>p>a {
+            text-decoration: none;
+            color: #1c1c1c;
+        }
+
+        .tax__invoice_1Invoice__container>div:nth-child(1) {
+            border-right: 1px solid #c7c7c7;
+        }
+
+        .tax__invoice_1Invoice__container>div>img {
+            width: 140px;
+        }
+
+        .left__side__bottom_row_container>p {
+            font-family: "Roboto", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            margin-bottom: 3px;
+        }
+
+        .two__row__col__grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            border-bottom: 1px solid #c7c7c7;
+        }
+
+        .two__row__col__grid>div {
+            width: 100%;
+            height: auto;
+            padding: 2px 7px;
+        }
+
+        .two__row__col__grid>div>p {
+            font-family: "Roboto", sans-serif;
+            font-size: 14px;
+            white-space: initial;
+            word-wrap: break-word;
+        }
+
+        .two__row__col__grid>div>p:nth-child(2) {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .two__row__col__grid>div:nth-child(2) {
+            border-left: 1px solid #c7c7c7;
+        }
+
+        .no__bold>div>p {
+            font-weight: 400 !important;
+        }
+
+        .bold {
+            font-weight: 700;
+        }
+
+        .terms__delivery__row {
+            padding: 2px 7px;
+        }
+
+        .terms__delivery__row>p {
+            font-family: "Roboto", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            margin-bottom: 3px;
+        }
+
+        .terms__delivery__row>p {
+            margin-bottom: 0rem;
+        }
+
+        .terms__delivery__row>p:nth-child(3) {
+            margin-bottom: 10px !important;
+        }
+
+
+        /* Table CSS Starts here */
+        .invoice__table__container__row {
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        .table-responsive {
+            max-height: 400px;
+            /* Set the desired height */
+            overflow-y: auto;
+            /* Vertical scroll */
+            overflow-x: auto;
+            /* Horizontal scroll, if needed */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 5px 0 0 0;
+            font-family: sans-serif;
+            min-width: 400px;
+        }
+
+        table thead tr {
+            text-align: left;
+        }
+
+        table th {
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .print-format th {
+            background-color: transparent !important;
+        }
+
+        table td {
+            font-weight: 400;
+        }
+
+        table th,
+        table td {
+            padding: 8px 10px;
+            border: 1px solid #dddddd;
+            font-family: "Roboto", sans-serif;
+            font-size: 12px;
+        }
+
+        /* Style for the bold text in the footer */
+        .bold {
+            font-weight: bold;
+        }
+
+        /* Table CSS Ends here */
+
+        /* Invoice Summary Component starts here */
+
+        .two__row_col__grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            border-top: none;
+            border-right: 1px solid #c7c7c7;
+            border-left: 1px solid #c7c7c7;
+            border-bottom: 1px solid #c7c7c7;
+        }
+
+        .two__row_col__grid>div {
+            padding: 2px 7px;
+        }
+
+        .two__row_col__grid>div>p {
+            font-family: "Roboto", sans-serif;
+            font-size: 12px;
+        }
+
+        .two__row_col__grid>div:nth-child(2) {
+            text-align: right;
+        }
+
+        /* .two__row_col__grid */
+
+        .invoice__row__single {
+            border-top: none;
+            border-right: 1px solid #c7c7c7;
+            border-left: 1px solid #c7c7c7;
+            border-bottom: 1px solid #c7c7c7;
+            padding: 2px 7px;
+        }
+
+        .invoice__row__single>p {
+            font-family: "Roboto", sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .three__row__grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+        }
+
+        .three__row__grid>div {
+            border: 1px solid #c7c7c7;
+            height: auto;
+            border-top: none;
+            /* display: flex;
+            flex-direction: column;
+            justify-content: center; */
+        }
+
+        .three__row__grid>div:nth-child(1),
+        .three__row__grid>div:nth-child(2) {
+            border-right: none;
+        }
+
+        .three__col1 {
+            padding: 2px 7px;
+        }
+
+        .three__col1>p:nth-child(1),
+        .three__col1>p:nth-child(2),
+        .three__col1>p:nth-child(3) {
+            font-family: "Roboto", sans-serif;
+            font-size: 12px;
+            color: #000;
+            font-weight: 700;
+        }
+
+        .three__col1>p:nth-child(3) {
+            margin-bottom: 20px;
+        }
+
+        .three__col1>p:nth-child(4),
+        .three__col1>p:nth-child(5) {
+            font-family: "Roboto", sans-serif;
+            font-size: 14px;
+            margin-bottom: 2px;
+            color: #000;
+            font-weight: 400;
+        }
+
+        .three__col2 {
+            text-align: right;
+            padding: 2px 7px;
+        }
+
+        .three__col2>p,
+        .three__col3>p {
+            font-family: "Roboto", sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .three__col3 {
+            text-align: center;
+            padding: 2px 7px;
+        }
+
+        .transparent {
+            color: transparent;
+        }
+
+        .three__col22 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .three__row__grid>div>p,
+        .three__col22>div>p {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .three__row__grid>div,
+        .three__col22>div {
+            padding: 2px 7px;
+        }
+
+
+        .two__equal__width__row {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .two__equal__width__row>div {
+            border: 1px solid #c7c7c7;
+            border-top: none;
+        }
+
+        .two__equal__width__row>div:nth-child(1) {
+            padding: 2px 7px;
+            border-right: none;
+        }
+
+        .two__equal__width__row>div>p {
+            font-size: 12px;
+            font-family: "Roboto", sans-serif;
+            font-weight: 700;
+        }
+
+        .payment-details>div>p {
+            font-weight: 400;
+        }
+
+        .payment-details>div>p:nth-child(1),
+        .payment-details>div>p:nth-child(2) {
+            margin-bottom: 5px;
+            margin-top: 10px;
+        }
+
+        .payment-details>div>p:nth-child(3) {
+            margin-bottom: 20px;
+        }
+
+        .payment-details>div>p:nth-child(2),
+        .payment-details>div>p:nth-child(4),
+        .payment-details>div>p:nth-child(5) {
+            margin-bottom: 20px;
+        }
+
+        .height {
+            height: 25px;
+            border-bottom: 1px solid #c7c7c7;
+        }
+
+        .signature>p {
+            font-size: 12px;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+
+        .signature-box-row {
+            height: 80px;
+        }
+
+
+        .hide-border {
+            border-bottom: none !important;
+        }
+
+        .hide-left-border {
+            border-left: none !important;
+        }
+
+        /* Invoice Summary Component ends here */
+    </style>
+</head>
+
+<body>
+    <h1 class="tax-invoice-heading">Tax Invoices</h1>
+    <div class="tax-invoice-header">
+        <div>
+            <!-- left side row starts here -->
+            <div class="tax__invoice_1Invoice__container">
+                <div>
+                    <img src="https://yadavashishdhirendra.github.io/invoice-template/Assets/logo.png" alt="">
+                </div>
+                {% set address = frappe.get_doc('Supplier', doc.custom_vendor) %}
+                <div>
+                    <h2><b>{{doc.custom_vendor}}</b></h2>
+                    <p>{{ address.primary_address }}<br></p>
+                </div>
+            </div>
+            <!-- left side row ends here -->
+
+            <!-- left side bottom row starts here -->
+            <div class="left__side__bottom_row_container">
+                <p>Buyer,</p>
+                <p>{{doc.supplier}}</p>
+                Billing Address: - {{doc.address_display}}
+                </p>
+                <!--<p>GST/UIN No. : 36AAHCM3845R1ZQ-->
+                <!--</p>-->
+                <!--<p>State Name : Telangana</p>-->
+                <!--<p>Code : 36</p>-->
+            </div>
+            <!-- left side bottom row ends here -->
+
+        </div>
+        <div>
+            <!-- 2 row column starts here -->
+            <div class="two__row__col__grid">
+                <div>
+                    <p>Invoice No:</p>
+                    <p>{{ doc.name }}</p>
+                </div>
+                <div>
+                    <p>Dated:</p>
+                    <p>{{ doc.get_formatted("posting_date") }}</p>
+                </div>
+            </div>
+            {% set data = frappe.get_doc('Purchase Receipt', doc.purchase_receipt) %}
+            <div class="two__row__col__grid">
+
+                <div>
+                    <p>Delivery Challan No:<b>{{ doc.name }}</b></p>
+                </div>
+                <div>
+                    <p>Dated:</p>
+                    <p>{{ data.get_formatted("posting_date") }}</p>
+                </div>
+            </div>
+            {% set info = frappe.get_doc('Purchase Order', doc.purchase_order) %}
+            <div class="two__row__col__grid">
+                <div>
+                    <p>Buyer's order No:</p>
+                    <p>{{doc.name}}</p>
+                </div>
+                <div>
+                    <p>Dated:</p>
+                    <p>{{ info.get_formatted("transaction_date") }}</p>
+                </div>
+            </div>
+
+            <div class="two__row__col__grid no__bold">
+                {% set termsinfo = frappe.get_doc('Supplier', doc.supplier) %}
+                <div>
+                    <p>Terms of Payment:{{termsinfo.custom_payment}}</p>
+                </div>
+                <div>
+                    <p>Destination:</p>
+                    <p>{{doc.place_of_supply}}</p>
+                </div>
+            </div>
+            <!-- 2 row column ends here -->
+
+            <div class="terms__delivery__row">
+                <p>Terms of Delivery : -{{termsinfo.custom_delivery_and_installation}}</p>
+                <!--<p>ICICI Bank</p>-->
+                <p>{{doc.shipping_address_display}}
+                </p>
+
+                <!--<p>GST/UIN No. : 27AAACI1195H1ZM-->
+                <!--</p>-->
+                <!--<p>State Name : Maharashtra-->
+                <!--</p>-->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Table Component starts here -->
+    <div class="invoice__table__container__row">
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Description of Goods</th>
+                        <th>HSN/SAC</th>
+                        <th>Quantity</th>
+                        <th>GST Rate</th>
+                        <th>Rate</th>
+                        <th>Total Rate</th>
+                        <th>CGST</th>
+                        <th>SGST</th>
+                        <th>IGST</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%- for row in doc.items -%}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ row.item_name }}</td>
+                        <td>{{ row.gst_hsn_code }}</td>
+                        <td>{{ row.qty }}</td>
+                        <td>{{ row.item_tax_template }}</td>
+                        <td>{{ row.rate }}</td>
+                        <td>{{ row.amount }}</td>
+                        <td>{{ row.cgst_rate }}</td>
+                        <td>{{ row.sgst_rate }}</td>
+                        <td>{{ row.igst_rate }}</td>
+                        <td>{{ row.custom_grand_total}}</td>
+                    </tr>
+
+                </tbody>
+                {%- endfor -%}
+                <tfoot>
+                    <tr>
+                        <td colspan="5"></td>
+                        <td class="bold">Total</td>
+                        <td class="bold">{{doc.total}}</td>
+                        <td class="bold">{{doc.total_taxes_and_charges}}</td>
+                        <td class="bold">{{doc.total_taxes_and_charges}}</td>
+                        <td class="bold"></td>
+                        <td class="bold">{{doc.grand_total}}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <!-- Table Component ends here -->
+
+
+    <!-- Invoice Summary -->
+
+    <!-- Two col starts here -->
+    <div class="two__row_col__grid">
+        <div>
+            <p style="text-align:left;">Amount Chargeable (in word)</p>
+        </div>
+        <div>
+            <p>E & O.E</p>
+        </div>
+    </div>
+    <!-- Two col ends here -->
+
+    <div class="invoice__row__single">
+        <p style="text-align:left;">{{doc.in_words}}</p>
+    </div>
+
+
+    <!-- 3 col starts here -->
+    <div class="three__row__grid">
+        <div class="three__col1">
+            <p style="text-align:left;">FORMULA</p>
+            <p style="text-align:left;">1. Rate* Quantity = Total Rate</p>
+            <p style="text-align:left;">2. Total Rate+CGST+SGST+IGST = Amount</p>
+            {% set companyinfo = frappe.get_doc('Company', doc.company) %}
+            <p style="text-align:left;">Company'S TIN No: {{companyinfo.gstin}}</p>
+            <p style="text-align:left;">Company'S PAN NO: {{companyinfo.pan}}</p>
+        </div>
+        <div class="three__col2">
+            <p>Gross Amt:</p>
+            <p>Total SGST:</p>
+            <p>Total CGST:</p>
+            <p>Total IGST:</p>
+            <p>Rounded Off:</p>
+            <p>Net Amt:</p>
+        </div>
+        <div class="three__col3">
+            <p>{{doc.total}}</p>
+            <p>{{doc.total_taxes_and_charges}}</p>
+            <p>{{doc.total_taxes_and_charges}}</p>
+            <p>{{doc.total_taxes_and_charges}}</p>
+            <!--<p class="transparent">-</p>-->
+            <!--<p class="transparent">-</p>-->
+            <p>{{doc.rounded_total}}</p>
+            <p>{{doc.base_rounded_total}}</p>
+        </div>
+    </div>
+    <!-- 3 col ends here -->
+
+
+    <!-- 3 col starts here -->
+    <div class="three__row__grid">
+        <div class="three__col1">
+            <p style="text-align:left;">GST Summary:</p>
+        </div>
+        <div class="three__col22">
+            <div>
+                <p>GST%</p>
+            </div>
+            <div>
+                <p>Goods Value:</p>
+            </div>
+        </div>
+        <div class="three__col3">
+            <p>Taxable Amt:</p>
+        </div>
+    </div>
+    <div class="three__row__grid">
+        <div class="three__col1 hide-border">
+
+        </div>
+        <div class="three__col22 hide-border hide-left-border">
+            <div>
+                <p>18%</p>
+            </div>
+            <div>
+                <p>{{doc.total}}</p>
+            </div>
+        </div>
+        <div class="three__col3 hide-left-border hide-border">
+            <p>{{doc.total_taxes_and_charges}}</p>
+        </div>
+    </div>
+    <div class="three__row__grid">
+        <div class="three__col1">
+        </div>
+        <div class="three__col22 hide-left-border">
+            <div>
+                <p>{{doc.total_taxes_and_charges}}
+                </p>
+            </div>
+            <div>
+                <p>0.00</p>
+            </div>
+        </div>
+        <div class="three__col3 hide-left-border">
+            <p>0.00</p>
+        </div>
+    </div>
+    <!-- 3 col ends here -->
+
+    <!-- Two col starts here -->
+    <div class="two__equal__width__row">
+        <div>
+            <p style="text-align:left;">Company's Bank Details :{{doc.custom_account_name}}</p>
+        </div>
+        <div></div>
+    </div>
+
+
+    <div class="two__equal__width__row payment-details">
+        <div>
+            <p style="text-align:left;">Account Name : {{doc.custom_account_name}}</p>
+            <p style="text-align:left;">Account Number : {{doc.custom_bank_account_no}}</p>
+            <p style="text-align:left;">Bank Name : {{doc.custom_v_bank_name}}</p>
+            <p style="text-align:left;">Branch : {{doc.custom_branch}}</p>
+            <p style="text-align:left;">IFSC Code :{{doc.custom_ifsc_code}}</p>
+        </div>
+        <div>
+            <div class="height"></div>
+            <div class="signature">
+                <p>For {{doc.custom_vendor}}</p>
+                <div class="signature-box-row">
+
+                </div>
+                <p>Authorised Signatory</p>
+            </div>
+        </div>
+    </div>
+    <html>
+
+    <!-- <head>
+        <style>
+            h1 {
+                text-align: center;
+            }
+
+            p {
+                text-align: center;
+            }
+
+            div {
+                text-align: center;
+            }
+        </style>
+    </head> -->
+    <!-- 
+    <body>
+        <p>This is the computer generated Tax invoice</p>
+    </body>
+
+    </html> -->
+
+    <!-- Two col ends here -->
+
+    <!-- Invoice Summary -->
+</body>
+
+</html>
