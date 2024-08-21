@@ -32,10 +32,17 @@
         .header-row-container>h1 {
             text-align: center;
             font-size: 32px;
+            font-weight: 800;
+        }
+
+        h2>span {
+            font-weight: 800;
+            font-size: 17px;
+            border-bottom: 1px solid #C7C7C7;
         }
 
         .header-row-container>h1>span {
-            border-bottom: 1px solid #1c1c1c;
+            border-bottom: 1px solid #C7C7C7;
         }
 
         .address-wrapper-container>p:nth-child(1) {
@@ -50,11 +57,11 @@
         }
 
         .address-wrapper-container>p:nth-child(4) {
-            margin: 10px 0px;
+            margin: 6px 0px;
         }
 
         .address-wrapper-container>p:nth-child(6) {
-            margin: 10px 0px;
+            margin: 6px 0px;
         }
 
         /* Header Row css ends here */
@@ -72,11 +79,16 @@
             background-color: #f2f2f2;
             border: 1px solid #000;
             padding: 8px;
+            font-size: 14px;
+            color: #1c1c1c;
         }
 
         .invoice-table tbody td {
             border: 1px solid #000;
             padding: 8px;
+            font-size: 14px;
+            font-size: 13px;
+            color: #1c1c1c;
         }
 
         .invoice-table tfoot td {
@@ -84,13 +96,52 @@
             padding: 8px;
             font-weight: bold;
             text-align: right;
+            font-size: 14px;
+            color: #1c1c1c;
         }
 
         .invoice-table tfoot td:first-child {
             text-align: left;
         }
 
+        .print-format th {
+            background-color: transparent !important;
+        }
+
         /* Table Component ends here */
+
+
+        /* Terms Table Component starts here */
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .terms-table td {
+            border: 1px solid #000;
+            padding: 8px;
+        }
+
+        .terms-table td:first-child {
+            width: 30%;
+            /* font-weight: bold; */
+        }
+
+        .terms-table td,
+        .terms-table th {
+            font-weight: 400;
+            font-size: 13px;
+            color: #1c1c1c;
+        }
+
+        .terms-table td:last-child {
+            width: 70%;
+        }
+
+        /* Terms Table Component ends here */
     </style>
 </head>
 
@@ -164,6 +215,38 @@
         </table>
     </div>
     <!-- Table Component ends here -->
+
+    <!-- Terms Table Component starts here -->
+    <div class="terms-table-wrapper">
+        <h2><span>Terms and Conditions</span></h2>
+        <table class="terms-table">
+            <tbody>
+                <tr>
+                    <td>Price</td>
+                    <td>The rates mentioned are exclusive of GST. Price is inclusive of installation at our Premises.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Delivery Period</td>
+                    <td>Within one week from issue of PO.</td>
+                </tr>
+                <tr>
+                    <td>Payment</td>
+                    <td>50% Advance and balance 50% After delivery & Installation report acknowledged by SPOC.</td>
+                </tr>
+                <tr>
+                    <td>Delivery and Installation</td>
+                    <td>Delivery and installation in good condition at designated location. Transportation charges Rs.
+                        500 extra.</td>
+                </tr>
+                <tr>
+                    <td>Warranty</td>
+                    <td>One year from the date of supply/installation.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Terms Table Component ends here -->
 </body>
 
 </html>
