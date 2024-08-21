@@ -29,13 +29,24 @@
 
         .header__challan {
             display: grid;
-            grid-template-columns: 0.5fr 3fr;
+            grid-template-columns: 0.3fr 3fr;
             gap: 20px;
         }
 
         .header__challan>div {
             height: auto;
             padding: 2px 7px;
+        }
+
+        .header__challan>div:nth-child(1) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header__challan>div>img {
+            max-width: 120px;
         }
 
         .header__challan>div>h1 {
@@ -60,14 +71,17 @@
 
         /* Address css style starts here */
         .address-container-row {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
+            /* display: grid;
+            grid-template-columns: 1.5fr 1fr; */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             gap: 20px;
         }
 
         .address-container-row>div {
             /* border: 1px solid black; */
-            margin-top: 30px;
+            margin-top: 10px;
             height: auto;
             padding: 20px 10px;
         }
@@ -79,12 +93,67 @@
             margin-bottom: 3px;
         }
 
-        .address-container-row>div>p{
+        .address-container-row>div>p {
             font-weight: 400;
             margin-bottom: 3px;
+            font-size: 13px;
         }
 
         /* Address css style ends here */
+
+        /* Invoice Table css style starts here */
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .invoice-table th,
+        .invoice-table td {
+            border: 1px solid #c7c7c7;
+            padding: 8px;
+            text-align: left;
+            color: #1c1c1c;
+        }
+
+        .invoice-table th {
+            background-color: transparent;
+            font-weight: bold;
+            font-family: "Roboto", sans-serif;
+            font-size: 14px;
+        }
+
+        .invoice-table td {
+            text-align: left;
+            font-size: 13px;
+        }
+
+        .invoice-table tbody tr td {
+            height: 30px;
+        }
+
+        /* Set the width of the "Sr. No." and "Qty" columns */
+        .invoice-table .small-column {
+            width: 10%;
+            text-align: center;
+        }
+
+        /* Ensure the "Description" column takes up the remaining space */
+        .invoice-table th:not(.small-column),
+        .invoice-table td:not(.small-column) {
+            width: auto;
+        }
+
+        .invoice-table tr td:nth-child(1),
+        .invoice-table tr td:last-child {
+            text-align: center;
+        }
+
+        .print-format th {
+            background-color: transparent !important;
+        }
+
+        /* Invoice Table css style ends here */
     </style>
 </head>
 
@@ -92,7 +161,7 @@
     <!-- Header Component starts here -->
     <div class="header__challan">
         <div>
-            <img src="./Assets/logo.png" alt="">
+            <img src="https://yadavashishdhirendra.github.io/invoice-template/Assets/logo.png" alt="">
         </div>
         <div>
             <h1>AGO2O STORES LLP</h1>
@@ -125,6 +194,53 @@
         </div>
     </div>
     <!-- Address Component ends here -->
+
+    <!-- Table component starts here -->
+    <div class="table-invoice-container">
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th class="small-column">Sr. No.</th>
+                    <th>Description</th>
+                    <th class="small-column">Qty</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>A4 printing paper</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Table component ends here -->
 </body>
 
 </html>

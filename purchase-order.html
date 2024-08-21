@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Font Family  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <title>Purchase Order</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body,
+        html {
+            padding: 10px 0px;
+            letter-spacing: 0.3px;
+            max-width: 1000px;
+            margin: 0 auto;
+            font-family: "Roboto", sans-serif;
+        }
+
+        /* Header Row css starts here */
+        .header-row-container>h1 {
+            text-align: center;
+            font-size: 32px;
+        }
+
+        .header-row-container>h1>span {
+            border-bottom: 1px solid #1c1c1c;
+        }
+
+        .address-wrapper-container>p:nth-child(1) {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .address-wrapper-container>p:nth-child(1),
+        .address-wrapper-container>p:nth-child(2) {
+            color: #1c1c1c;
+            font-weight: 800;
+        }
+
+        .address-wrapper-container>p:nth-child(4) {
+            margin: 10px 0px;
+        }
+
+        .address-wrapper-container>p:nth-child(6) {
+            margin: 10px 0px;
+        }
+
+        /* Header Row css ends here */
+
+        /* Table Component starts here */
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .invoice-table thead th {
+            background-color: #f2f2f2;
+            border: 1px solid #000;
+            padding: 8px;
+        }
+
+        .invoice-table tbody td {
+            border: 1px solid #000;
+            padding: 8px;
+        }
+
+        .invoice-table tfoot td {
+            border: 1px solid #000;
+            padding: 8px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .invoice-table tfoot td:first-child {
+            text-align: left;
+        }
+
+        /* Table Component ends here */
+    </style>
+</head>
+
+<body>
+    <div class="header-row-container">
+        <h1><span>PURCHASE ORDER</span></h1>
+
+        <p>PO: ICICIBANK7707082024</p>
+        <p>DATE: 7th Aug 2024</p>
+    </div>
+
+    <!-- To Address component starts here -->
+    <div class="address-wrapper-container">
+        <p>To,</p>
+        <p>AGO2O STORES LLP</p>
+        <p>Office No. 113 & 114, 1st Floor, Ajmera Sikova, Nityanand Nagar, Ghatkopar West,
+            Mumbai,Maharashtra,India-400086</p>
+
+        <p>Dear Sir :</p>
+        <p>Ref: ICF/HO/O2O/RC/2021</p>
+
+        <p>We are happy to award you the Purchase order Ground Floor, ICICI Bank Towers, BKC Road, Bandra Kurla
+            Complex,
+            Mumbai Suburban, , Mumbai, Maharashtra, India-400051</p>
+        <p>GST no - 27AAACI1195H1ZM</p>
+    </div>
+    <!-- To Address component ends here -->
+
+    <!-- Table Component starts here -->
+    <div class="table-invoice-table-wrapper">
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th>Sr. No.</th>
+                    <th>Description</th>
+                    <th>No of Unit</th>
+                    <th>Rate</th>
+                    <th>Total</th>
+                    <th>GST</th>
+                    <th>Grand Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Copper Bottle</td>
+                    <td>20</td>
+                    <td>1042.37</td>
+                    <td>20847.4</td>
+                    <td>3752.53</td>
+                    <td>24599.93</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Jute-Bag</td>
+                    <td>20</td>
+                    <td>95.00</td>
+                    <td>1900</td>
+                    <td>342</td>
+                    <td>2242</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">Total</td>
+                    <td>22747.4</td>
+                    <td>4094.53</td>
+                    <td>26841.93</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!-- Table Component ends here -->
+</body>
+
+</html>
