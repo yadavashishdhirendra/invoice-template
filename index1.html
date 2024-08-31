@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body,
+        html {
+            padding: 10px 0px;
+            letter-spacing: 0.3px;
+            font-family: "Roboto", sans-serif;
+            max-width: 800px;
+        }
+
+
+        .invoice-table {
+            width: 100%;
+            /* Ensure both tables are half the container's width */
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+
+        .invoice-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            vertical-align: top;
+            font-size: 12px;
+        }
+
+        .logo {
+            width: 20%;
+            text-align: center;
+            vertical-align: top;
+        }
+
+        .company-info {
+            width: 80%;
+            text-align: left;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .company-info strong {
+            font-size: 14px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .buyer-info {
+            text-align: left;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .section-title {
+            font-weight: bold;
+            text-align: left;
+            padding-left: 10px;
+        }
+        .print-format th {
+            background-color: transparent !important;
+        }
+
+
+        /* 2nd Table Css starts here */
+        .invoice__table__container__row {
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        .table-responsive {
+            max-height: 400px;
+            /* Set the desired height */
+            overflow-y: auto;
+            /* Vertical scroll */
+            overflow-x: auto;
+            /* Horizontal scroll, if needed */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 5px 0 0 0;
+            font-family: sans-serif;
+            /* min-width: 400px; */
+        }
+
+        table thead tr {
+            text-align: left;
+        }
+
+        table th {
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .print-format th {
+            background-color: transparent !important;
+        }
+
+        table td {
+            font-weight: 400;
+        }
+
+        table th,
+        table td {
+            padding: 8px 10px;
+            border: 1px solid #dddddd;
+            font-family: "Roboto", sans-serif;
+            font-size: 12px;
+        }
+
+        /* Style for the bold text in the footer */
+        .bold {
+            font-weight: bold;
+        }
+
+        /* 2nd Table Css ends here */
+    </style>
+    <title>Invoice Table</title>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>
+                <table class="invoice-table">
+                    <tr>
+                        <td class="logo">
+                            <img src="https://yadavashishdhirendra.github.io/invoice-template/Assets/logo.png"
+                                alt="Company Logo" width="80">
+                        </td>
+                        <td class="company-info">
+                            <strong>AGO2O STORES LLP</strong>
+                            Office No. 113 & 114, 1st Floor, Ajmera Sikova,<br>
+                            Nityanand Nagar, Ghatkopar West, Mumbai, Maharashtra India-400086<br>
+                            GST/UIN No.: 27ABSFA3175F1Z8<br>
+                            State Name: Maharashtra<br>
+                            E-Mail: support@o2o.ind.in
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="buyer-info">
+                            <strong>Buyer:</strong><br>
+                            Muthoot Homefin (India) Limited<br>
+                            Billing Address: - Third Floor, 3-6-2/1/1, Grandpas Royal Mansion, Himayat Nagar Main Road,
+                            Near
+                            Liberty
+                            X Road, Himayat Nagar, Hyderabad, Telangana, 500029, Hyderabad, Telangana, India-500029<br>
+                            GST/UIN No.: 36AAHCM3845R1ZQ<br>
+                            State Name: Telangana<br>
+                            Code: 36
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table border="1" class="invoice-table">
+                    <tr>
+                        <td>Invoice No:<br><strong>AG020/24-25/830</strong></td>
+                        <td>Dated:<br><strong>03/08/2024</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Buyer's order No:<br><strong>ICICIBANK7707082024</strong></td>
+                        <td>Dated:<br><strong>03/08/2024</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Mode/ Terms of Payment:<br><strong>100% on Delivery</strong></td>
+                        <td>Destination:<br><strong>Maharashtra</strong></td>
+                    </tr>
+                    <tr>
+                        <td height="0" border="0" style="border: none;" colspan="2" class="section-title">Terms of
+                            Delivery:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="0" border="0" style="border: none;" colspan="2">ICICI Bank<br>
+                            Shipping Address: - Ground Floor, ICICI Bank Towers, BKC Road, Bandra Kurla Complex, Mumbai
+                            Suburban,
+                            Mumbai, Maharashtra, India-400051
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">GST/UIN No.:<br><strong>27AAACI1195H1ZM</strong></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Table Component starts here -->
+    <div class="invoice__table__container__row">
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Description of Goods</th>
+                        <th>HSN/SAC</th>
+                        <th>Quantity</th>
+                        <th>GST Rate</th>
+                        <th>Rate</th>
+                        <th>Total Rate</th>
+                        <th>CGST</th>
+                        <th>SGST</th>
+                        <th>IGST</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Copper Bottle</td>
+                        <td>7310</td>
+                        <td>20</td>
+                        <td>18%</td>
+                        <td>1042.37</td>
+                        <td>20847.4</td>
+                        <td>1,876.27</td>
+                        <td>1,876.27</td>
+                        <td>0.00</td>
+                        <td>24,599.93</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Jute-Bag</td>
+                        <td>6305</td>
+                        <td>20</td>
+                        <td>18%</td>
+                        <td>95.00</td>
+                        <td>1900</td>
+                        <td>171.00</td>
+                        <td>171.00</td>
+                        <td>0.00</td>
+                        <td>2,242.00</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Freight Cost (Transport)</td>
+                        <td>9967</td>
+                        <td>-</td>
+                        <td>18%</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5"></td>
+                        <td class="bold">Total</td>
+                        <td class="bold">22,747.40</td>
+                        <td class="bold">2,047.27</td>
+                        <td class="bold">2,047.27</td>
+                        <td class="bold"></td>
+                        <td class="bold">26,841.93</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <!-- Table Component ends here -->
+
+
+</body>
+
+</html>

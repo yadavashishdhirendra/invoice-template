@@ -4,19 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Font Family  -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
-    <title>Purchase Order</title>
-
+    <title>Document</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
+        .two-column-table {
+            width: 100%;
+            border-collapse: collapse;
+            /* Ensures there are no gaps between cells */
+        }
+
+        .two-column-table td {
+            vertical-align: top;
+            /* Align content to the top of the cell */
+        }
+
+        .two-column-table .left-column {
+            width: 50%;
+            /* Make each column take up half the width */
+        }
+
+        .two-column-table .right-column {
+            width: 50%;
+            /* Make each column take up half the width */
         }
 
         body,
@@ -33,6 +41,14 @@
             text-align: center;
             font-size: 32px;
             font-weight: 800;
+            margin-bottom: 30px;
+        }
+
+        .header-row-container>img {
+            width: 15%;
+            display: flex;
+            margin-bottom: 30px;
+            margin-left: auto;
         }
 
         h2>span {
@@ -143,7 +159,8 @@
 
         .header-table .logo {
             width: 100%;
-            text-align: right; /* Align the image to the right */
+            text-align: right;
+            /* Align the image to the right */
         }
 
         @media print {
@@ -153,24 +170,53 @@
             }
         }
 
+        body:last-child .print-format td img {
+            width: 40% !important;
+        }
+
         /* Terms Table Component ends here */
     </style>
 </head>
 
 <body>
     <div class="header-row-container">
-        <h1><span>PURCHASE ORDER</span></h1>
+        <!--<td colspan="2" img-align="right"><img src="https://yadavashishdhirendra.github.io/invoice-template/Assets/logo.png" style="width:18%;"></td>-->
+        <!--<tr>-->
+        <!--    <td class="logo">-->
+        <!--        <img src="https://yadavashishdhirendra.github.io/invoice-template/Assets/logo.png" style="width:18%;" alt="Company Logo">-->
+        <!--    </td>-->
+        <!--</tr>-->
 
-        <p>PO: ICICIBANK7707082024</p>
-        <p>DATE: 7th Aug 2024</p>
+        <table class="two-column-table">
+            <tr>
+                <td class="left-column">
+
+                </td>
+                <td align="end" class="right-column">
+                    <img src="https://yadavashishdhirendra.github.io/invoice-template/Assets/logo.png"
+                        style="width:18%;" alt="Company Logo">
+                </td>
+            </tr>
+        </table>
+
+        <td>
+            <h1><span>PURCHASE ORDER</span></h1>
+        </td>
+        {% set supplierlogo= frappe.get_doc('Supplier', doc.supplier) %}
+
+
+
+        <p>PO: {{doc.name}}</p>
+        <p>DATE: {{ doc.get_formatted("transaction_date") }}</p>
     </div>
 
     <!-- To Address component starts here -->
     <div class="address-wrapper-container">
         <p>To,</p>
-        <p>AGO2O STORES LLP</p>
-        <p>Office No. 113 & 114, 1st Floor, Ajmera Sikova, Nityanand Nagar, Ghatkopar West,
-            Mumbai,Maharashtra,India-400086</p>
+        {% set vendor_address = frappe.get_doc('Address', doc.custom_vendor_address) %}
+        <p>{{doc.custom_vendor}}</p>
+        <p>{{vendor_address.address_line1}},{{vendor_address.address_line2}},<br>
+            {{vendor_address.city}},{{vendor_address.state}},{{vendor_address.country}},{{vendor_address.pincode}}</p>
 
         <p>Dear Sir :</p>
         <p>Ref: ICF/HO/O2O/RC/2021</p>
@@ -178,7 +224,7 @@
         <p>We are happy to award you the Purchase order Ground Floor, ICICI Bank Towers, BKC Road, Bandra Kurla
             Complex,
             Mumbai Suburban, , Mumbai, Maharashtra, India-400051</p>
-        <p>GST no - 27AAACI1195H1ZM</p>
+        <p><b>GST no </b>-{{doc.gst_category}}</p>
     </div>
     <!-- To Address component ends here -->
 
@@ -197,31 +243,27 @@
                 </tr>
             </thead>
             <tbody>
+                {%- for row in doc.items -%}
                 <tr>
-                    <td>1</td>
-                    <td>Copper Bottle</td>
-                    <td>20</td>
-                    <td>1042.37</td>
-                    <td>20847.4</td>
-                    <td>3752.53</td>
-                    <td>24599.93</td>
+                    <td>{{loop.index}}</td>
+                    <td>{{row.description}}</td>
+                    <td>{{row.stock_uom}}</td>
+                    </td>
+                    <td>{{row.rate}}</td>
+                    <td>{{row.amount}}</td>
+                    <td>{{row.custom_gstn_value}}</td>
+                    <td>{{row.custom_grand_total}}</td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jute-Bag</td>
-                    <td>20</td>
-                    <td>95.00</td>
-                    <td>1900</td>
-                    <td>342</td>
-                    <td>2242</td>
-                </tr>
+                {%- endfor -%}
+
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="4">Total</td>
-                    <td>22747.4</td>
-                    <td>4094.53</td>
-                    <td>26841.93</td>
+
+                    <td colspan="4" style="text-align:right;">Total</td>
+                    <td style="text-align:left;">{{doc.base_total}}</td>
+                    <td style="text-align:left;">{{doc.taxes_and_charges_added}}</td>
+                    <td style="text-align:left;">{{doc.grand_total}}</td>
                 </tr>
             </tfoot>
         </table>
@@ -233,27 +275,28 @@
         <h2><span>Terms and Conditions</span></h2>
         <table class="terms-table">
             <tbody>
+                {% set termsinfo = frappe.get_doc('Supplier', doc.supplier) %}
                 <tr>
                     <td>Price</td>
-                    <td>The rates mentioned are exclusive of GST. Price is inclusive of installation at our Premises.
+                    <td>{{termsinfo.custom_price}}
                     </td>
                 </tr>
                 <tr>
                     <td>Delivery Period</td>
-                    <td>Within one week from issue of PO.</td>
+                    <td>{{termsinfo.custom_delivery_period}}</td>
                 </tr>
                 <tr>
                     <td>Payment</td>
-                    <td>50% Advance and balance 50% After delivery & Installation report acknowledged by SPOC.</td>
+                    <td>{{termsinfo.custom_payment}}</td>
                 </tr>
                 <tr>
                     <td>Delivery and Installation</td>
-                    <td>Delivery and installation in good condition at designated location. Transportation charges Rs.
-                        500 extra.</td>
+                    <td>{{termsinfo.custom_delivery_and_installation}}</td>
                 </tr>
                 <tr>
                     <td>Warranty</td>
-                    <td>One year from the date of supply/installation.</td>
+                    <td>{{termsinfo.custom_warranty}}</td>
+                    </td>
                 </tr>
             </tbody>
         </table>

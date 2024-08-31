@@ -4,28 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invoice 1</title>
-
-    <!-- Font Family  -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
+    <title>Sample Tax Invoice</title>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
+        h1 {
+            text-align: center;
         }
 
-        body,
-        html {
-            padding: 10px 0px;
-            letter-spacing: 0.3px;
-            max-width: 1000px;
-            margin: 0 auto;
-            font-family: "Roboto", sans-serif;
+        p {
+            text-align: center;
+        }
+
+        div {
+            text-align: center;
         }
 
         .tax-invoice-header {
@@ -332,7 +323,7 @@
         .three__col22>div>p {
             font-size: 12px;
             font-weight: 700;
-            margin-bottom: 0px;
+            margin-bottom: 8px;
         }
 
         .three__row__grid>div,
@@ -411,10 +402,11 @@
 
         /* Invoice Summary Component ends here */
     </style>
+
 </head>
 
 <body>
-    <h1 class="tax-invoice-heading">Tax Invoice</h1>
+    <h1 class="tax-invoice-heading">Tax Invoices</h1>
     <div class="tax-invoice-header">
         <div>
             <!-- left side row starts here -->
@@ -422,33 +414,32 @@
                 <div>
                     <img src="https://yadavashishdhirendra.github.io/invoice-template/Assets/logo.png" alt="">
                 </div>
+                {% set vendor_address = frappe.get_doc('Address', doc.custom_vendor_address) %}
+                {% set address = frappe.get_doc('Supplier', doc.custom_vendor) %}
                 <div>
-                    <h2><b>AGO2O STORES LLP</b></h2>
-                    <p>Office No. 113 & 114, 1st Floor, Ajmera
-                        Sikova, Nityanand Nagar, Ghatkopar West,,
-                        Mumbai, Maharashtra
-                        India-400086</p>
-                    <p>GST/UIN No. : 27ABSFA3175F1Z8</p>
-                    <p>State Name : Maharashtra
-                    </p>
-                    <p>E-Mail : <a href="mailto:support@o2o.ind.in">support@o2o.ind.in</a></p>
+                    <h2><b>{{doc.custom_vendor}}</b></h2>
+                    <p>{{ vendor_address.address_line1}},{{ vendor_address.address_line2}},{{ vendor_address.city}},{{
+                        vendor_address.state}},{{ vendor_address.country}},{{ vendor_address.pincode}},{{
+                        vendor_address.email_id}}</p>
                 </div>
             </div>
             <!-- left side row ends here -->
 
             <!-- left side bottom row starts here -->
             <div class="left__side__bottom_row_container">
-                <p>Buyer,</p>
-                <p>Muthoot Homefin (India) Limited
-                    Billing Address: - Third Floor, 3-6-2/1/1, Grandpas Royal
-                    Mansion, Himayat Nagar Main Road, Near Liberty X Road,
-                    Himayat Nagar, Hyderabad, Hyderabad, Telangana,
-                    500029, Hyderabad, Telangana, India-500029
+                <p style="text-align:left;">Buyer,</p>
+                <p style="text-align:left;">{{doc.supplier}}</p>
+                {% set billing_address = frappe.get_doc('Address', doc.supplier_address) %}
+                <p style="text-align:left;">Billing Address:
+                    -{{billing_address.address_line1}},{{billing_address.address_line2}},{{ billing_address.city}},{{
+                    billing_address.state}},{{ billing_address.country}},{{ billing_address.pincode}}GST/UIN No:{{
+                    billing_address.gstin}},State Name:{{ billing_address.state}},Code:{{
+                    billing_address.gst_state_number}}
                 </p>
-                <p>GST/UIN No. : 36AAHCM3845R1ZQ
-                </p>
-                <p>State Name : Telangana</p>
-                <p>Code : 36</p>
+                <!--<p>GST/UIN No. : 36AAHCM3845R1ZQ-->
+                <!--</p>-->
+                <!--<p>State Name : Telangana</p>-->
+                <!--<p>Code : 36</p>-->
             </div>
             <!-- left side bottom row ends here -->
 
@@ -458,61 +449,59 @@
             <div class="two__row__col__grid">
                 <div>
                     <p>Invoice No:</p>
-                    <p>AGO20/24-25/830</p>
+                    <p>{{ doc.name }}</p>
                 </div>
                 <div>
                     <p>Dated:</p>
-                    <p>03/08/2024</p>
+                    <p>{{ doc.get_formatted("posting_date") }}</p>
                 </div>
             </div>
-
+            {% set data = frappe.get_doc('Purchase Receipt', doc.purchase_receipt) %}
             <div class="two__row__col__grid">
+
                 <div>
-                    <p>Invoice No:</p>
-                    <p>AGO20/24-25/830</p>
+                    <p>Delivery Challan No:<b>{{ doc.name }}</b></p>
                 </div>
                 <div>
                     <p>Dated:</p>
-                    <p>03/08/2024</p>
+                    <p>{{ data.get_formatted("posting_date") }}</p>
                 </div>
             </div>
-
+            {% set info = frappe.get_doc('Purchase Order', doc.purchase_order) %}
             <div class="two__row__col__grid">
                 <div>
                     <p>Buyer's order No:</p>
-                    <p>ICICIBANK7707082024</p>
+                    <p>{{doc.name}}</p>
                 </div>
                 <div>
                     <p>Dated:</p>
-                    <p>03/08/2024</p>
+                    <p>{{ info.get_formatted("transaction_date") }}</p>
                 </div>
             </div>
 
             <div class="two__row__col__grid no__bold">
+                {% set termsinfo = frappe.get_doc('Supplier', doc.supplier) %}
                 <div>
-                    <p>Mode/ Terms of Payment:-</p>
-                    <p>100% on Delivery:-</p>
+                    <p>Terms of Payment:{{termsinfo.custom_payment}}</p>
                 </div>
                 <div>
                     <p>Destination:</p>
-                    <p>Maharashtra</p>
+                    <p>{{doc.place_of_supply}}</p>
                 </div>
             </div>
             <!-- 2 row column ends here -->
 
             <div class="terms__delivery__row">
-                <p>Terms of Delivery:-</p>
-                <p>ICICI Bank</p>
-                <p>Shipping Address: - Ground Floor, ICICI Bank
-                    Towers, BKC Road, Bandra Kurla Complex,
-                    Mumbai Suburban, , Mumbai, Maharashtra,
-                    India-400051
-                </p>
+                <p>Terms of Delivery : -{{termsinfo.custom_delivery_and_installation}}</p>
+                <!--<p>ICICI Bank</p>-->
 
-                <p>GST/UIN No. : 27AAACI1195H1ZM
-                </p>
-                <p>State Name : Maharashtra
-                </p>
+                <p style="text-align:left;">{{doc.supplier}}</p>
+                {% set shipping_address = frappe.get_doc('Address', doc.shipping_address) %}
+                <p style="text-align:left;">Shipping Address:
+                    -{{shipping_address.address_line1}},{{shipping_address.address_line2}},{{ shipping_address.city}},{{
+                    shipping_address.state}},{{ shipping_address.country}},{{ shipping_address.pincode}},GST/UIN No:{{
+                    shipping_address.gstin}},State Name:{{ shipping_address.state}}</p>
+
             </div>
         </div>
     </div>
@@ -538,55 +527,32 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {%- for row in doc.items -%}
                     <tr>
-                        <td>1</td>
-                        <td>Copper Bottle</td>
-                        <td>7310</td>
-                        <td>20</td>
-                        <td>18%</td>
-                        <td>1042.37</td>
-                        <td>20847.4</td>
-                        <td>1,876.27</td>
-                        <td>1,876.27</td>
-                        <td>0.00</td>
-                        <td>24,599.93</td>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ row.item_name }}</td>
+                        <td>{{ row.gst_hsn_code }}</td>
+                        <td>{{ row.qty }}</td>
+                        <td>{{ row.item_tax_template }}</td>
+                        <td>{{ row.rate }}</td>
+                        <td>{{ row.amount }}</td>
+                        <td>{{ row.cgst_rate }}</td>
+                        <td>{{ row.sgst_rate }}</td>
+                        <td>{{ row.igst_rate }}</td>
+                        <td>{{ row.custom_grand_total}}</td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Jute-Bag</td>
-                        <td>6305</td>
-                        <td>20</td>
-                        <td>18%</td>
-                        <td>95.00</td>
-                        <td>1900</td>
-                        <td>171.00</td>
-                        <td>171.00</td>
-                        <td>0.00</td>
-                        <td>2,242.00</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Freight Cost (Transport)</td>
-                        <td>9967</td>
-                        <td>-</td>
-                        <td>18%</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>0.00</td>
-                        <td>0.00</td>
-                        <td>0.00</td>
-                        <td>0.00</td>
-                    </tr>
+
                 </tbody>
+                {%- endfor -%}
                 <tfoot>
                     <tr>
                         <td colspan="5"></td>
                         <td class="bold">Total</td>
-                        <td class="bold">22,747.40</td>
-                        <td class="bold">2,047.27</td>
-                        <td class="bold">2,047.27</td>
+                        <td class="bold">{{doc.total}}</td>
+                        <td class="bold">{{doc.total_taxes_and_charges}}</td>
+                        <td class="bold">{{doc.total_taxes_and_charges}}</td>
                         <td class="bold"></td>
-                        <td class="bold">26,841.93</td>
+                        <td class="bold">{{doc.grand_total}}</td>
                     </tr>
                 </tfoot>
             </table>
@@ -600,44 +566,55 @@
     <!-- Two col starts here -->
     <div class="two__row_col__grid">
         <div>
-            <p>Amount Chargeable (in word)</p>
+            <p style="text-align:left;">Amount Chargeable (in word)</p>
         </div>
         <div>
-            <p>E & O.E</p>
+            <p style="text-align:right;">E & O.E</p>
+            <p></p>
         </div>
     </div>
     <!-- Two col ends here -->
 
     <div class="invoice__row__single">
-        <p>Twenty Six Thousands Eight Hundred and Forty Two Rupees Only</p>
+        <p style="text-align:left;">{{doc.in_words}}</p>
     </div>
 
 
     <!-- 3 col starts here -->
     <div class="three__row__grid">
         <div class="three__col1">
-            <p>FORMULA</p>
-            <p>1. Rate* Quantity = Total Rate</p>
-            <p>2. Total Rate+CGST+SGST+IGST = Amount</p>
-
-            <p>Company'S TIN No: NSKA11300C</p>
-            <p>Company'S PAN NO: ABSFA3175F</p>
+            <p style="text-align:left;">FORMULA</p>
+            <p style="text-align:left;">1. Rate* Quantity = Total Rate</p>
+            <p style="text-align:left;">2. Total Rate+CGST+SGST+IGST = Amount</p>
+            {% set companyinfo = frappe.get_doc('Company', doc.company) %}
+            <p style="text-align:left;">Company'S TIN No: {{companyinfo.gstin}}</p>
+            <p style="text-align:left;">Company'S PAN NO: {{companyinfo.pan}}</p>
         </div>
         <div class="three__col2">
             <p>Gross Amt:</p>
+            {% if doc.tax_category == "In-State" %}
             <p>Total SGST:</p>
             <p>Total CGST:</p>
+            {% endif %}
+            {% if doc.tax_category == "Out-State" %}
             <p>Total IGST:</p>
+            {% endif %}
             <p>Rounded Off:</p>
             <p>Net Amt:</p>
         </div>
         <div class="three__col3">
-            <p>22,747.40</p>
-            <p>2,047.27</p>
-            <p class="transparent">-</p>
-            <p class="transparent">-</p>
-            <p>2,047.27</p>
-            <p>26,842.00</p>
+            <p>{{doc.total}}</p>
+            {% if doc.tax_category == "In-State" %}
+            <p>{{doc.total_taxes_and_charges}}</p>
+            <p>{{doc.total_taxes_and_charges}}</p>
+            {% endif %}
+            {% if doc.tax_category == "Out-State" %}
+            <p>{{doc.total_taxes_and_charges}}</p>
+            {% endif %}
+            <!--<p class="transparent">-</p>-->
+            <!--<p class="transparent">-</p>-->
+            <p>{{doc.rounded_total}}</p>
+            <p>{{doc.base_rounded_total}}</p>
         </div>
     </div>
     <!-- 3 col ends here -->
@@ -646,7 +623,7 @@
     <!-- 3 col starts here -->
     <div class="three__row__grid">
         <div class="three__col1">
-            <p>GST Summary:</p>
+            <p style="text-align:left;">GST Summary:</p>
         </div>
         <div class="three__col22">
             <div>
@@ -665,39 +642,85 @@
 
         </div>
         <div class="three__col22 hide-border hide-left-border">
+            {% if doc.custom_28_goods_value > 0 %}
+            <div>
+                <p>28%</p>
+            </div>
+            <div>
+                <p>{{doc.custom_28_goods_value}}</p>
+            </div>
+            {% endif %}
+            <!---->
+            {% if doc.custom_18_goods_value > 0 %}
             <div>
                 <p>18%</p>
             </div>
             <div>
-                <p>22,747.40</p>
+                <p>{{doc.custom_18_goods_value}}</p>
             </div>
-        </div>
-        <div class="three__col3 hide-left-border hide-border">
-            <p>4,094.53</p>
-        </div>
-    </div>
-    <div class="three__row__grid">
-        <div class="three__col1">
-        </div>
-        <div class="three__col22 hide-left-border">
+            {% endif %} <!---->
+            {% if doc.custom_12_goods_value> 0 %}
             <div>
-                <p>4,094.53
-                </p>
+                <p>12%</p>
             </div>
             <div>
-                <p>0.00</p>
+                <p>{{doc.custom_12_goods_value}}</p>
+            </div>
+            {% endif %}
+            <!---->
+            {% if doc.custom_5_goods_value > 0 %}
+            <div>
+                <p>5%</p>
+            </div>
+            <div>
+                <p>{{doc.custom_5_goods_value}}</p>
+            </div>
+            {% endif %}
+            <!---->
+            <div>
+                <p>18%</p>
+            </div>
+            <div>
+                <p>{{doc.taxes_and_charges_added}}</p>
             </div>
         </div>
-        <div class="three__col3 hide-left-border">
-            <p>0.00</p>
+        <div class="three__col3 hide-border hide-left-border">
+            {% if doc.custom_gst_28__ot > 0 %}
+            <div>
+                <p>{{doc.custom_gst_28__ot}}</p>
+            </div>
+            {% endif %}
+            {% if doc.custom_gst_18__ot > 0 %}
+            <div>
+                <p>{{doc.custom_gst_18__ot}}</p>
+            </div>
+            {% endif %}
+            {% if doc.custom_gst_12__ot > 0 %}
+            <div>
+                <p>{{doc.custom_gst_12__ot}}</p>
+            </div>
+            {% endif %}
+            {% if doc.custom_gst_5__ot > 0 %}
+            <div>
+                <p>{{doc.custom_gst_5__ot}}</p>
+            </div>
+            {% endif %}
+            {% if doc.taxes_and_charges_added > 0 %}
+            <div>
+                <p>{{doc.taxes_and_charges_added}}</p>
+            </div>
+            {% endif %}
         </div>
+
+
     </div>
+
     <!-- 3 col ends here -->
 
     <!-- Two col starts here -->
     <div class="two__equal__width__row">
         <div>
-            <p>Company's Bank Details :</p>
+            <p style="text-align:left;">Company's Bank Details :{{doc.custom_account_name}}</p>
         </div>
         <div></div>
     </div>
@@ -705,29 +728,23 @@
 
     <div class="two__equal__width__row payment-details">
         <div>
-            <p>Account Name : AGO2O STORES LLP
-            </p>
-            <p>Account Number : 9821218677</p>
-            <p>Bank Name : KOTAK MAHINDRA
-            </p>
-            <p>Branch : MULUND EAST</p>
-            <p>IFSC Code : KKBK0001432</p>
+            <p style="text-align:left;">Account Name : {{doc.custom_account_name}}</p>
+            <p style="text-align:left;">Account Number : {{doc.custom_bank_account_no}}</p>
+            <p style="text-align:left;">Bank Name : {{doc.custom_v_bank_name}}</p>
+            <p style="text-align:left;">Branch : {{doc.custom_branch}}</p>
+            <p style="text-align:left;">IFSC Code :{{doc.custom_ifsc_code}}</p>
         </div>
         <div>
             <div class="height"></div>
             <div class="signature">
-                <p>For AGO2O STORES LLP</p>
+                <p>For {{doc.custom_vendor}}</p>
                 <div class="signature-box-row">
-
+                    <img src="{{address.custom_signature}}" height="50px" width="70px">
                 </div>
                 <p>Authorised Signatory</p>
             </div>
         </div>
     </div>
-    <!-- Two col ends here -->
-
-    <!-- Invoice Summary -->
-
 </body>
 
 </html>
