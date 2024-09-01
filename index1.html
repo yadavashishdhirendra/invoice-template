@@ -16,6 +16,7 @@
             letter-spacing: 0.3px;
             font-family: "Roboto", sans-serif;
             max-width: 800px;
+            margin: auto;
         }
 
 
@@ -63,25 +64,13 @@
             text-align: left;
             padding-left: 10px;
         }
+
         .print-format th {
             background-color: transparent !important;
         }
 
 
         /* 2nd Table Css starts here */
-        .invoice__table__container__row {
-            max-width: 100%;
-            overflow-x: auto;
-        }
-
-        .table-responsive {
-            max-height: 400px;
-            /* Set the desired height */
-            overflow-y: auto;
-            /* Vertical scroll */
-            overflow-x: auto;
-            /* Horizontal scroll, if needed */
-        }
 
         table {
             width: 100%;
@@ -108,6 +97,13 @@
             font-weight: 400;
         }
 
+
+        .header__invoice__table .border-none {
+            border: none;
+            vertical-align: top;
+            padding: 8px 0px;
+        }
+
         table th,
         table td {
             padding: 8px 10px;
@@ -116,20 +112,159 @@
             font-size: 12px;
         }
 
+
         /* Style for the bold text in the footer */
         .bold {
             font-weight: bold;
         }
 
+        .header__invoice__table {
+            border-collapse: separate;
+        }
+
         /* 2nd Table Css ends here */
+
+
+        /* Amount Table Component starts here */
+        .amount__table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0px 0;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .amount__table td {
+            border: 1px solid #c7c7c7;
+            border-top: none;
+            padding: 8px;
+            vertical-align: top;
+        }
+
+        .amount-chargeable {
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .eoe {
+            text-align: right;
+        }
+
+        .amount-words {
+            font-weight: bold;
+        }
+
+        .details div,
+        .amounts div {
+            margin-bottom: 8px;
+        }
+
+        .net-amt {
+            font-weight: bold;
+        }
+
+        .formula p {
+            margin: 0;
+        }
+
+        .company-info p {
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Amount Table component ends here */
+
+        /* Bank Details Component starts here */
+
+        .bank-details-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+        }
+
+        .bank-details-title {
+            font-weight: bold;
+            /* padding: 10px; */
+            border: 1px solid #c7c7c7;
+            border-top: none;
+            text-align: left;
+        }
+
+        .bank-details-info,
+        .signatory {
+            vertical-align: top;
+            padding: 10px;
+            border: 1px solid #c7c7c7;
+            width: 50%;
+        }
+
+        .bank-details-info p,
+        .signatory p {
+            margin: 5px 0;
+        }
+
+        .signatory {
+            text-align: center;
+        }
+
+        .signature {
+            display: block;
+            margin: 10px auto;
+            /* height: 50px; */
+            width: 120px !important;
+        }
+
+        .authorized-signatory {
+            font-weight: bold;
+        }
+
+        .footer-text {
+            text-align: center;
+            font-size: 12px;
+            padding: 10px;
+            border: 1px solid #c7c7c7;
+            font-style: italic;
+        }
+
+        /* Bank Details Component ends here */
+
+        /* GST Component starts here */
+        .gst-summary {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+        }
+
+        .gst-summary th,
+        .gst-summary td {
+            border: 1px solid #c7c7c7;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .gst-summary th.summary-header {
+            text-align: left;
+            font-weight: bold;
+            border-right: none;
+        }
+
+        .gst-summary thead th {
+            border-bottom: 1px solid #c7c7c7;
+        }
+
+        .gst-summary tbody tr td:first-child {
+            border-left: 1px solid #c7c7c7 !important;
+        }
+
+        /* GST Component ends here */
     </style>
     <title>Invoice Table</title>
 </head>
 
 <body>
-    <table>
+    <table class="header__invoice__table">
         <tr>
-            <td>
+            <td class="border-none">
                 <table class="invoice-table">
                     <tr>
                         <td class="logo">
@@ -160,7 +295,7 @@
                     </tr>
                 </table>
             </td>
-            <td>
+            <td class="border-none">
                 <table border="1" class="invoice-table">
                     <tr>
                         <td>Invoice No:<br><strong>AG020/24-25/830</strong></td>
@@ -187,7 +322,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">GST/UIN No.:<br><strong>27AAACI1195H1ZM</strong></td>
+                        <td height="0" border="0" style="border: none;" colspan="2">GST/UIN
+                            No.:<br><strong>27AAACI1195H1ZM</strong></td>
                     </tr>
                 </table>
             </td>
@@ -271,6 +407,96 @@
     <!-- Table Component ends here -->
 
 
+    <!-- Amount Table Component starts here -->
+    <table class="amount__table">
+        <tr>
+            <td class="amount-chargeable" style="border-right: none;" colspan="3">Amount Chargeable (in words)</td>
+            <td class="eoe" colspan="2" style="border-left: none;">E & O.E</td>
+        </tr>
+        <tr>
+            <td colspan="5" class="amount-words">Twenty Six Thousands Eight Hundred and Forty Two Rupees Only</td>
+        </tr>
+        <tr>
+            <td rowspan="5" class="formula">
+                <p><strong>FORMULA</strong></p>
+                <p>1. Rate* Quantity = Total Rate</p>
+                <p>2. Total Rate+CGST+SGST+IGST = Amount</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="details">
+                <div>Gross Amt:</div>
+                <div>Total SGST:</div>
+                <div>Total CGST:</div>
+                <div>Total IGST:</div>
+                <div>Rounded Off:</div>
+                <div class="net-amt">Net Amt:</div>
+            </td>
+            <td colspan="3" class="amounts">
+                <div>22,747.40</div>
+                <div>2,047.27</div>
+                <div>2,047.27</div>
+                <div>0.00</div>
+                <div>0.00</div>
+                <div class="net-amt">26,842.00</div>
+            </td>
+        </tr>
+
+    </table>
+    <!-- Amount Table Component ends here -->
+
+    <!-- GST Component starts here -->
+    <table class="gst-summary">
+        <thead>
+            <tr>
+                <th rowspan="4" class="summary-header" style="border-top: none;width: 61%;border-bottom: 1px solid #c7c7c7 !important;">GST Summary:</th>
+                <th style="border-left: none;border-right: none;border-top: none;">GST%</th>
+                <th style="border-left: none;border-right: none;border-top: none;">Goods Value:</th>
+                <th style="border-left: none;border-top: none;">Taxable Amt:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="border: none;"></td>
+                <td style="border-left: none;border-right: none;border-bottom: none;">18%</td>
+                <td style="border-left: none;border-right: none;border-bottom: none;">22,747.40</td>
+                <td style="border-left: none;border-bottom: none;">4,094.53</td>
+            </tr>
+            <tr>
+                <td style="border-top: none;border-right: none;"></td>
+                <td style="border-left: none;border-right: none;border-top: none;">18%</td>
+                <td style="border-left: none;border-right: none;border-top: none;">0.00</td>
+                <td style="border-left: none;border-top: none;">0.00</td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- GST Component ends here -->
+
+    <!-- Bank Details Table Component starts here -->
+    <table class="bank-details-table">
+        <tr>
+            <td colspan="2" class="bank-details-title">Company's Bank Details :</td>
+        </tr>
+        <tr>
+            <td class="bank-details-info">
+                <p>Account Name : AGO2O STORES LLP</p>
+                <p>Account Number : 9821218677</p>
+                <p>Bank Name : KOTAK MAHINDRA</p>
+                <p>Branch : MULUND EAST</p>
+                <p>IFSC Code : KKBK0001432</p>
+            </td>
+            <td class="signatory">
+                <p>For AGO2O STORES LLP</p>
+                <img style="width: 120px !important;" src="https://onlinepngtools.com/images/examples-onlinepngtools/george-walker-bush-signature.png"
+                    alt="Signature" class="signature">
+                <p class="authorized-signatory">Authorised Signatory</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="footer-text">This is a computer generated Tax Invoice.</td>
+        </tr>
+    </table>
+    <!-- Bank Details Table Component ends here -->
 </body>
 
 </html>

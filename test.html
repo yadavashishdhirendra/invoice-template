@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GST Summary Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .gst-summary {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .gst-summary th,
+        .gst-summary td {
+            border: 1px solid #c7c7c7;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .gst-summary th.summary-header {
+            text-align: left;
+            font-weight: bold;
+            border-right: none;
+        }
+
+        .gst-summary thead th {
+            border-bottom: 1px solid #c7c7c7;
+        }
+
+        .gst-summary tbody tr td:first-child {
+            border-left: 1px solid #c7c7c7 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <table class="gst-summary">
+        <thead>
+            <tr>
+                <th rowspan="2" class="summary-header">GST Summary:</th>
+                <th style="border-left: none;border-right: none;">GST%</th>
+                <th style="border-left: none;border-right: none;">Goods Value:</th>
+                <th style="border-left: none;">Taxable Amt:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="border: none;"></td>
+                <td style="border-left: none;border-right: none;border-bottom: none;">18%</td>
+                <td style="border-left: none;border-right: none;border-bottom: none;">22,747.40</td>
+                <td style="border-left: none;border-right: none;border-bottom: none;">4,094.53</td>
+            </tr>
+            <tr>
+                <td style="border-top: none;border-right: none;"></td>
+                <td style="border-left: none;border-right: none;border-top: none;">18%</td>
+                <td style="border-left: none;border-right: none;border-top: none;">0.00</td>
+                <td style="border-left: none;border-right: none;border-top: none;">0.00</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
